@@ -361,3 +361,8 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+.idea/
+
+NotefyMe.WebApp/appsettings.json
+NotefyMe.WebApp/appsettings.Development.json

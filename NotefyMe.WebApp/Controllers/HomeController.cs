@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using NotefyMe.WebApp.Models;
+using NotefyMe.WebApp.ViewModels;
 using System.Diagnostics;
 
 namespace NotefyMe.WebApp.Controllers

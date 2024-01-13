@@ -1,4 +1,4 @@
-namespace NotefyMe.WebApp.Models
+namespace NotefyMe.WebApp.ViewModels
 {
     public class ErrorViewModel
     {
