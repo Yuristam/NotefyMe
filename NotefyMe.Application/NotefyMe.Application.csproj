@@ -10,4 +10,8 @@
     <Folder Include="Interfaces\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\NotefyMe.Domain\NotefyMe.Domain.csproj" />
+  </ItemGroup>
+
 </Project>

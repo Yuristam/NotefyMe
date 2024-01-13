@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Data\" />
     <Folder Include="Persistence\" />
     <Folder Include="Repositories\" />
     <Folder Include="Services\" />
@@ -19,6 +18,11 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\NotefyMe.Application\NotefyMe.Application.csproj" />
+    <ProjectReference Include="..\NotefyMe.Domain\NotefyMe.Domain.csproj" />
   </ItemGroup>
 
 </Project>
