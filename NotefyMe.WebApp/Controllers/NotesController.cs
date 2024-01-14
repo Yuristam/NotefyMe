@@ -20,7 +20,7 @@ namespace NotefyMe.WebApp.Controllers
             var notes = await _notesRepository.GetAllNotesAsync();
             return View(notes);
         }
-
+        
         public async Task<IActionResult> Details(int id)
         {
             var note = await _notesRepository.GetNoteByIdAsync(id);
@@ -54,7 +54,7 @@ namespace NotefyMe.WebApp.Controllers
             }
             return View(createNoteViewModel);
         }
-
+        
         public async Task<IActionResult> Edit(int id)
         {
             var note = await _notesRepository.GetNoteByIdAsync(id);
