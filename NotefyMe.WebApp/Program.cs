@@ -10,6 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<INotesRepository, NoteRepository>();
+builder.Services.AddScoped<IUsersRepository, UsersRepository>();
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {

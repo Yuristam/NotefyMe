@@ -23,7 +23,7 @@ namespace NotefyMe.WebApp.Controllers
         public IActionResult Login()
         {
             var response = new LoginViewModel();
-            return View();
+            return View(response);
         }
 
         [HttpPost]
