@@ -20,6 +20,12 @@ namespace NotefyMe.WebApp.Controllers
             return View(notes);
         }
 
+        public async Task<IActionResult> Details(int id)
+        {
+            var note = await _notesRepository.GetNoteByIdAsync(id);
+            return View(note);
+        }
+
         public IActionResult Create()
         {
             return View();
