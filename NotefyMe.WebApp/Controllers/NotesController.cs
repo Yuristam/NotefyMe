@@ -33,6 +33,7 @@ namespace NotefyMe.WebApp.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(CreateNoteViewModel createNoteViewModel)
         {
             if(ModelState.IsValid)
@@ -102,6 +103,7 @@ namespace NotefyMe.WebApp.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
+
                     if (!_notesRepository.NoteExists(editNoteViewModel.Id))
                     {
                         return NotFound();
@@ -110,10 +112,39 @@ namespace NotefyMe.WebApp.Controllers
                     {
                         throw;
                     }
+                
                 }
             }
 
             return View(editNoteViewModel);
+        }
+
+        public async Task<IActionResult> Delete(int id)
+        {
+            var noteDetails = await _notesRepository.GetNoteByIdAsync(id);
+
+            if (noteDetails == null)
+            {
+                return View("Error");
+            }
+
+            return View(noteDetails);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var noteDetails = await _notesRepository.GetNoteByIdAsync(id);
+           
+            if (noteDetails == null)
+            {
+                return View("Error");
+            }
+
+            _notesRepository.Delete(noteDetails);
+
+            return RedirectToAction("Index");
         }
     }
 }
