@@ -1,7 +1,18 @@
+using Microsoft.EntityFrameworkCore;
+using NotefyMe.Application.Interfaces;
+using NotefyMe.Infrastructure.Data;
+using NotefyMe.Infrastructure.Repositories;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddScoped<INotesRepository, NoteRepository>();
+
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+});
 
 var app = builder.Build();
 
