@@ -47,5 +47,10 @@ namespace NotefyMe.Infrastructure.Repositories
             _context.Update(note);
             return Save();
         }
+        
+        public bool NoteExists(int id)
+        {
+            return (_context.Notes?.Any(n => n.Id == id)).GetValueOrDefault();
+        }
     }
 }

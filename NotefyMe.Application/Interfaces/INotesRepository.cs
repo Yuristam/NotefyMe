@@ -10,5 +10,6 @@ namespace NotefyMe.Application.Interfaces
         bool Update(Note note);
         bool Delete(Note note);
         bool Save();
+        bool NoteExists(int id);
     }
 }
