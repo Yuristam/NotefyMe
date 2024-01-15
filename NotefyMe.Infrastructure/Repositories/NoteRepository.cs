@@ -2,6 +2,7 @@
 using NotefyMe.Application.Interfaces;
 using NotefyMe.Domain.Entities;
 using NotefyMe.Infrastructure.Data;
+using System.Security.Claims;
 
 namespace NotefyMe.Infrastructure.Repositories
 {
@@ -26,9 +27,9 @@ namespace NotefyMe.Infrastructure.Repositories
             return Save();
         }
 
-        public async Task<IEnumerable<Note>> GetAllNotesAsync()
+        public async Task<IEnumerable<Note>> GetAllNotesByUserIdAsync(string userId)
         {
-            return await _context.Notes.ToListAsync();
+            return await _context.Notes.Where(n => n.WebUserId == userId).ToListAsync();
         }
 
         public Task<Note> GetNoteByIdAsync(int id)

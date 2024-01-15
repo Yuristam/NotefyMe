@@ -3,6 +3,8 @@
 
 <form method="post" asp-action="Create">
 
+    <input type="hidden" id="WebUserId" name="WebUserId" asp-for="WebUserId" />
+
     <div class="form-group">
         <label asp-for="Title">Title</label>
         <input asp-for="Title" class="form-control" placeholder="Title">
