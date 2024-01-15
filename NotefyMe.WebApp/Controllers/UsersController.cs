@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using NotefyMe.Application.Interfaces;
-using NotefyMe.Infrastructure.Repositories;
 using NotefyMe.WebApp.ViewModels;
 
 namespace NotefyMe.WebApp.Controllers
@@ -41,7 +40,7 @@ namespace NotefyMe.WebApp.Controllers
         {
             var user = await _usersRepository.GetUserId(id);
             
-            var userDetailViewModel = new UserDetailsViewModel()
+            var userDetailsViewModel = new UserDetailsViewModel()
             {
                 Id = user.Id,
                 UserName = user.UserName,
@@ -49,7 +48,7 @@ namespace NotefyMe.WebApp.Controllers
                 BirthDate = user.BirthDate
             };
 
-            return View(userDetailViewModel);
+            return View(userDetailsViewModel);
         }
     }
 }

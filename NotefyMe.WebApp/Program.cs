@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using NotefyMe.Application.Interfaces;
 using NotefyMe.Domain.Users;
 using NotefyMe.Infrastructure.Data;
+using NotefyMe.Infrastructure.Persistence;
 using NotefyMe.Infrastructure.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -25,6 +26,14 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
     .AddCookie();
 
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+
+    await Seed.SeedUsersAndRolesAsync(services);
+    //Seed.SeedData(services);
+}
 
 if (!app.Environment.IsDevelopment())
 {
