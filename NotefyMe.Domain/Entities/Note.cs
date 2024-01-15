@@ -1,5 +1,7 @@
 ﻿using NotefyMe.Domain.Enums;
+using NotefyMe.Domain.Users;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace NotefyMe.Domain.Entities
 {
@@ -13,5 +15,9 @@ namespace NotefyMe.Domain.Entities
         public DateTime? DateUpdated { get; set; }
         public NoteCategory NoteCategory { get; set; }
         public NoteColor NoteColor { get; set; }
+        
+        [ForeignKey("WebUser")]
+        public string? WebUserId { get; set; }
+        public WebUser? WebUser { get; set; }
     }
 }
