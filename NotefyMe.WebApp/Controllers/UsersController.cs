@@ -13,7 +13,7 @@ namespace NotefyMe.WebApp.Controllers
             _usersRepository = usersRepository;
         }
 
-        [HttpGet("users")]
+        [HttpGet("Users")]
         public async Task<IActionResult> Index()
         {
             var users = await _usersRepository.GetAllUsers();

@@ -30,12 +30,23 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
 
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="Index">Users</a>
+                            </li>
+                        }
+
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Notes" asp-action="Index">Notes</a>
                         </li>
                         
                         @if (User.Identity.IsAuthenticated)
                         {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Dashboard"
+                                   asp-action="Index">Dashboard</a>
+                            </li>
                             <li class="nav-item">
                                 <form asp-area="" asp-controller="Accounts" asp-action="Logout">
                                     <button class="btn btn-outline-danger">Logout</button>

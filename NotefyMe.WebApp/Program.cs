@@ -2,16 +2,19 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using NotefyMe.Application.Interfaces;
+using NotefyMe.Application.Services;
 using NotefyMe.Domain.Users;
 using NotefyMe.Infrastructure.Data;
 using NotefyMe.Infrastructure.Persistence;
 using NotefyMe.Infrastructure.Repositories;
+using NotefyMe.WebApp.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<INotesRepository, NoteRepository>();
 builder.Services.AddScoped<IUsersRepository, UsersRepository>();
+builder.Services.AddScoped<IDashboardService, DashboardService>();
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
@@ -43,8 +46,8 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-app.UseRouting();
-app.UseAuthorization();
+app.UseRouting(); 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
