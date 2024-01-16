@@ -14,5 +14,7 @@ namespace NotefyMe.WebApp.ViewModels
         public DateTime DateCreated { get; set; }
         public NoteCategory NoteCategory { get; set; }
         public NoteColor NoteColor{ get; set; }
+
+        public string WebUserId { get; set; }
     }
 }

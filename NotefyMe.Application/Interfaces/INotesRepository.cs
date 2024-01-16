@@ -4,7 +4,8 @@ namespace NotefyMe.Application.Interfaces
 {
     public interface INotesRepository
     {
-        Task<IEnumerable<Note>> GetAllNotesAsync();
+        //Task<IEnumerable<Note>> GetAllNotesAsync();
+        Task<IEnumerable<Note>> GetAllNotesByUserIdAsync(string userId);
         Task<Note> GetNoteByIdAsync(int id);
         bool Add(Note note);
         bool Update(Note note);

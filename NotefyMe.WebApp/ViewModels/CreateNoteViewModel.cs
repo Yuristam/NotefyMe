@@ -13,5 +13,7 @@ namespace NotefyMe.WebApp.ViewModels
         public string? Description { get; set; }
         public NoteCategory NoteCategory { get; set; }
         public NoteColor NoteColor { get; set; }
+
+        public string WebUserId { get; set; }
     }
 }

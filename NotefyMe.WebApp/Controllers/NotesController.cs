@@ -1,23 +1,29 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using NotefyMe.Application.Interfaces;
 using NotefyMe.Domain.Entities;
+using NotefyMe.Infrastructure.Extensions;
 using NotefyMe.WebApp.ViewModels;
+using System.Security.Claims;
 
 namespace NotefyMe.WebApp.Controllers
 {
     public class NotesController : Controller
     {
         private readonly INotesRepository _notesRepository;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public NotesController(INotesRepository notesRepository)
+        public NotesController(INotesRepository notesRepository, IHttpContextAccessor httpContextAccessor)
         {
             _notesRepository = notesRepository;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         public async Task<IActionResult> Index()
         {
-            var notes = await _notesRepository.GetAllNotesAsync();
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var notes = await _notesRepository.GetAllNotesByUserIdAsync(userId);
             return View(notes);
         }
         
@@ -29,7 +35,10 @@ namespace NotefyMe.WebApp.Controllers
 
         public IActionResult Create()
         {
-            return View();
+            var currentUserId = _httpContextAccessor.HttpContext.User.GetUserId();
+            var createNoteViewModel = new CreateNoteViewModel { WebUserId = currentUserId };
+
+            return View(createNoteViewModel);
         }
 
         [HttpPost]
@@ -46,7 +55,8 @@ namespace NotefyMe.WebApp.Controllers
                     DateCreated = DateTime.Now,
                     DateUpdated = null,
                     NoteCategory = createNoteViewModel.NoteCategory,
-                    NoteColor = createNoteViewModel.NoteColor
+                    NoteColor = createNoteViewModel.NoteColor,
+                    WebUserId = createNoteViewModel.WebUserId
                 };
 
                 _notesRepository.Add(note);
@@ -66,7 +76,8 @@ namespace NotefyMe.WebApp.Controllers
                 Description = note.Description,
                 DateCreated = note.DateCreated,
                 NoteCategory = note.NoteCategory,
-                NoteColor = note.NoteColor
+                NoteColor = note.NoteColor,
+                WebUserId = note.WebUserId
             };
 
             return View(editNoteViewModel);
@@ -94,7 +105,8 @@ namespace NotefyMe.WebApp.Controllers
                         DateCreated = editNoteViewModel.DateCreated,
                         DateUpdated = DateTime.Now,
                         NoteCategory = editNoteViewModel.NoteCategory,
-                        NoteColor = editNoteViewModel.NoteColor
+                        NoteColor = editNoteViewModel.NoteColor,
+                        WebUserId = editNoteViewModel.WebUserId
                     };
 
                     _notesRepository.Update(note);
