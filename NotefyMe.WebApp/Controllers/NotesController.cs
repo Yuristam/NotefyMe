@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using NotefyMe.Application.Interfaces;
 using NotefyMe.Domain.Entities;
@@ -75,7 +76,8 @@ namespace NotefyMe.WebApp.Controllers
                 Description = note.Description,
                 DateCreated = note.DateCreated,
                 NoteCategory = note.NoteCategory,
-                NoteColor = note.NoteColor
+                NoteColor = note.NoteColor,
+                WebUserId = note.WebUserId
             };
 
             return View(editNoteViewModel);
@@ -103,7 +105,8 @@ namespace NotefyMe.WebApp.Controllers
                         DateCreated = editNoteViewModel.DateCreated,
                         DateUpdated = DateTime.Now,
                         NoteCategory = editNoteViewModel.NoteCategory,
-                        NoteColor = editNoteViewModel.NoteColor
+                        NoteColor = editNoteViewModel.NoteColor,
+                        WebUserId = editNoteViewModel.WebUserId
                     };
 
                     _notesRepository.Update(note);
